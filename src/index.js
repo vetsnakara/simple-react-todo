@@ -8,4 +8,4 @@ const root = document.querySelector("#todo-wrapper");
 
 ReactDOM.render(<App />, root);
 
-module.hot.accept();
+if (process.env.NODE_ENV === "development") module.hot.accept();

@@ -1,4 +1,7 @@
-const webpack = require("webpack");
+const path = require("path");
+
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -21,17 +24,17 @@ module.exports = {
     extensions: ["*", ".js", ".jsx"]
   },
 
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: "Simple React Todo App with Routing",
+      template: "./src/index.html"
+    })
+  ],
+
   output: {
-    path: __dirname + "/dist",
+    path: path.resolve(__dirname, "..", "dist"),
     filename: "bundle.js",
     publicPath: "/"
-  },
-
-  plugins: [new webpack.HotModuleReplacementPlugin()],
-
-  devServer: {
-    historyApiFallback: true,
-    contentBase: "./dist",
-    hot: true
   }
 };
